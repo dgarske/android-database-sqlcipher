@@ -37,7 +37,7 @@ LOCAL_VENDOR_MODULE := true
 LOCAL_ARM_MODE := arm
 LOCAL_MULTILIB := both
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)
-LOCAL_CFLAGS := -DWOLFSSL_USER_SETTINGS -DBUILD_SQLCIPHER -Os -fomit-frame-pointer
+LOCAL_CFLAGS := -DWOLFSSL_USER_SETTINGS -DBUILD_SQLCIPHER -Os -mcpu=cortex-a53+crypto -mstrict-align -fomit-frame-pointer
 LOCAL_EXPORT_CFLAGS := -DWOLFSSL_USER_SETTINGS -DBUILD_SQLCIPHER
 LOCAL_C_INCLUDES += \
 	$(OPENSSL_DIR)/wolfssl \
@@ -94,7 +94,6 @@ LOCAL_SRC_FILES+= \
 	$(OPENSSL_DIR)/wolfcrypt/src/selftest.c \
 	$(OPENSSL_DIR)/wolfcrypt/src/signature.c \
 	$(OPENSSL_DIR)/wolfcrypt/src/sp_arm32.c \
-	$(OPENSSL_DIR)/wolfcrypt/src/sp_arm64.c \
 	$(OPENSSL_DIR)/wolfcrypt/src/sp_armthumb.c \
 	$(OPENSSL_DIR)/wolfcrypt/src/sp_c32.c \
 	$(OPENSSL_DIR)/wolfcrypt/src/sp_c64.c \
@@ -108,6 +107,8 @@ LOCAL_SRC_FILES+= \
 	$(OPENSSL_DIR)/wolfcrypt/src/wc_port.c \
 	$(OPENSSL_DIR)/wolfcrypt/src/wolfevent.c \
 	$(OPENSSL_DIR)/wolfcrypt/src/wolfmath.c
+
+# NOTE: For FIPS sp_arm64.c is in in ecc.c
 
 # FIPS Boundary Files
 LOCAL_SRC_FILES+= \
